@@ -7,12 +7,13 @@ const StudentListModal = ({ onSelect, onClose }) => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const studentsAll = 2;
 
   const fetchData = async () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch("api/student_all", {
+      const response = await fetch(`api/${studentsAll}`, {
         headers: {
           "Cache-Control": "no-cache",
           Pragma: "no-cache",
