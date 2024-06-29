@@ -87,6 +87,8 @@ export default function StudentRegisterPortal() {
   const handleFormSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
+
+    await handleDownloadPDF();
     // console.log(formData);
     if (!appNo) {
       alert("GGSIPU APPLICATION NUMBER IS REQUIRED!");
@@ -1352,7 +1354,7 @@ export default function StudentRegisterPortal() {
                         {"Subject 1"}
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         name="subject_1"
                         id="subject_1"
                         autoComplete="off"
@@ -1554,7 +1556,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.board_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1572,7 +1574,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.roll_no_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1595,7 +1597,7 @@ export default function StudentRegisterPortal() {
                         max={2024}
                         value={formValues.year_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1611,14 +1613,14 @@ export default function StudentRegisterPortal() {
                         {"Subject 1"}
                       </label>
                       <input
-                        type="text"
+                        type="number"
                         name="subject_1_12"
                         id="subject_1_12"
                         autoComplete="off"
                         placeholder="Marks"
                         value={formValues.subject_1_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1637,7 +1639,7 @@ export default function StudentRegisterPortal() {
                         placeholder="Marks"
                         value={formValues.subject_2_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1658,7 +1660,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         placeholder="Marks"
                         value={formValues.subject_3_12}
-                        required
+                        // required
                         onChange={handleFileInputChange}
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
@@ -1677,7 +1679,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         placeholder="Marks"
                         value={formValues.subject_4_12}
-                        required
+                        // required
                         onChange={handleFileInputChange}
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
@@ -1700,7 +1702,7 @@ export default function StudentRegisterPortal() {
                         placeholder="Marks"
                         value={formValues.subject_5_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1739,7 +1741,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.total_marks_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1757,7 +1759,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.total_percentage_12}
                         onChange={handleFileInputChange}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1778,7 +1780,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.pcm_marks}
                         onChange={(e) => handleFileInputChange(e)}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1796,7 +1798,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         value={formValues.pcm_percentage}
                         onChange={(e) => handleFileInputChange(e)}
-                        required
+                        // required
                         className="py-1 px-3 w-2/3 border-2 rounded-md border-gray-400 outline-none text-md"
                       />
                     </div>
@@ -1826,7 +1828,7 @@ export default function StudentRegisterPortal() {
                         autoComplete="off"
                         placeholder="Enter Google Drive Link (Please select: Anyone with the link - Shareable)"
                         className="py-1 px-3 w-full border-2 rounded-md border-gray-400 outline-none text-md"
-                        required
+                        // required
                       />
                     </div>
                   </div>
@@ -2295,7 +2297,7 @@ export default function StudentRegisterPortal() {
               {/* PDF Notice */}
               <p className="text-md font-medium">
                 {
-                  "* Generate pdf after filling all the details. The submit button will be enabled when the pdf is downloaded."
+                  "* Generate pdf after filling all the details. Form will be automatically submitted after generating PDF."
                 }
                 {/* <Link
                 href={"https://www.msit.in"}
@@ -2316,7 +2318,7 @@ export default function StudentRegisterPortal() {
 
               {/* Download as PDF */}
               <div className="flex gap-4">
-                <button
+                {/* <button
                   type="button"
                   onClick={(e) => handleDownloadPDF(e)}
                   className={` text-white py-2 px-6 rounded-lg font-medium text-md bg-indigo-900 hover:bg-indigo-700 active:bg-indigo-900 ${
@@ -2353,20 +2355,14 @@ export default function StudentRegisterPortal() {
                   ) : (
                     "Generate PDF for proof"
                   )}
-                </button>
+                </button> */}
 
                 {/* Submit Button */}
                 <button
                   type="submit"
                   className={` text-white py-2 px-6 rounded-lg font-medium text-md bg-indigo-900 hover:bg-indigo-700 active:bg-indigo-900 " ${
                     isLoading ? "opacity-50" : "cursor-pointer"
-                  } ${
-                    pdfDownloaded
-                      ? "cursor-pointer"
-                      : "opacity-50 cursor-not-allowed"
-                  }
-              }`}
-                  disabled={!pdfDownloaded}
+                  }`}
                 >
                   {isLoading ? (
                     <div className="flex items-center">
@@ -2393,7 +2389,7 @@ export default function StudentRegisterPortal() {
                       </svg>
                     </div>
                   ) : (
-                    "Submit"
+                    "Generate PDF for Proof and Submit Form"
                   )}
                 </button>
               </div>
